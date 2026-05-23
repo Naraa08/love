@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2nd Anniversary, My Love! ❤️</title>
+    <style>
+        /* Ерөнхий тохиргоо */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #fbc2eb 100%);
+            color: #4a4a4a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Хөвөх зүрхний эффект */
+        .heart-particle {
+            position: absolute;
+            color: #ff477e;
+            font-size: 20px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0;
+            bottom: -20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Үндсэн контейнер */
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px 25px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(254, 67, 101, 0.2);
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            color: #ff477e;
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7d6b73;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Сэтгэл татам цаг тоологч */
+        .counter-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+        .time-segment {
+            background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+            padding: 18px 5px;
+            border-radius: 18px;
+            border: 1px solid #ffccd5;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.08);
+            transition: transform 0.3s;
+        }
+        .time-segment:hover {
+            transform: translateY(-5px);
+        }
+        .time-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff477e;
+            text-shadow: 1px 1px 2px rgba(255, 71, 126, 0.2);
+        }
+        .time-label {
+            font-size: 0.85rem;
+            color: #8a7a80;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        /* Дурсамжийн зургийн Slider */
+        .slider-title {
+            color: #ff5c8a;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-align: left;
+            padding-left: 10px;
+            border-left: 4px solid #ff477e;
+        }
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 35px;
+            max-height: 550px;
+            aspect-ratio: 4 / 5;
+            position: relative;
+            background: #000;
+        }
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slideAnimation 12s infinite ease-in-out;
+        }
+        .slider img {
+            width: 33.33%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #fff5f8;
+        }
+        @keyframes slideAnimation {
+            0% { margin-left: 0%; }
+            28% { margin-left: 0%; }
+            33% { margin-left: -100%; }
+            61% { margin-left: -100%; }
+            66% { margin-left: -200%; }
+            95% { margin-left: -200%; }
+            100% { margin-left: 0%; }
+        }
+
+        /* Интерактив Дугтуй / Захидал */
+        .envelope-container {
+            margin-top: 20px;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+        .envelope {
+            background: #ff6b8b;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(255, 107, 139, 0.3);
+            transition: all 0.5s ease;
+            display: inline-block;
+            width: 80%;
+        }
+        .envelope:hover {
+            transform: scale(1.05);
+            background: #ff477e;
+        }
+        .letter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1s ease-out;
+            background: #fff9fb;
+            border-radius: 15px;
+            padding: 0 20px;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            border: 1px dashed #ffccd5;
+            margin-top: 15px;
+        }
+        .letter-content.open {
+            max-height: 1000px;
+            padding: 25px 20px;
+        }
+        .letter-content p {
+            font-style: italic;
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05rem;
+            white-space: pre-line;
+            margin-top: 15px;
+        }
+
+        /* Хөгжим тоглуулагчийн дизайн */
+        .music-player {
+            background: #fff0f5;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 5px;
+            border: 1px solid #ffccd5;
+        }
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .player-controls button {
+            background: #ff477e;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .player-controls button:hover {
+            background: #ff1453;
+        }
+        #trackTime {
+            font-size: 0.85rem;
+            color: #8a7a80;
+            font-weight: 500;
+        }
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #ff477e;
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="music1.mp3" type="audio/mpeg">
+        Чиний хөтөч audio тагийг дэмжихгүй байна.
+    </audio>
+
+    <div class="container">
+        <h1>Happy 2 Years! ❤️</h1>
+        <p class="subtitle">Миний амьдралын хамгийн гоё 2 жил</p>
+
+        <div class="counter-box">
+            <div class="time-segment">
+                <div class="time-number" id="days">00</div>
+                <div class="time-label">ӨДӨР</div>
+            </div>
+            <div class="time-segment">
+                <div class="time-number" id="hours">00</div>
+                <div class="time-label">ЦАГ</div>
+            </div>
+            <div class="time-segment">
+                <div class="time-number" id="minutes">00</div>
+                <div class="time-label">МИНУТ</div>
+            </div>
+            <div class="time-segment">
+                <div class="time-number" id="seconds">00</div>
+                <div class="time-label">СЕКУНД</div>
+            </div>
+        </div>
+
+        <div class="slider-title">Бидний нандин дурсамжууд...</div>
+        <div class="slider-wrapper">
+            <div class="slider">
+                <img src="photo1.jpg" alt="Дурсамж 1">
+                <img src="photo2.jpg" alt="Дурсамж 2">
+                <img src="photo3.jpg" alt="Дурсамж 3">
+            </div>
+        </div>
+
+        <div class="envelope-container" onclick="toggleLetter()">
+            <div class="envelope" id="envelopeBtn">
+                ✉️ Чамдаа зориулсан захидал (Дээр нь дараарай)
+            </div>
+            <div class="letter-content" id="letterContent">
+                
+                <div class="music-player">
+                    <div class="player-controls">
+                        <button id="playPauseBtn" onclick="togglePlay(event)">⏸️ Pause</button>
+                        <span id="trackTime">0:00 / 0:00</span>
+                    </div>
+                    <div class="progress-container" id="progressContainer" onclick="setSpeed(event)">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <p>
+                    Миний нандин эрдэнэд,
+
+                    Өнөөдөр чи бид хоёрын хамтдаа туулсан амьдралын маань хамгийн гоё 2 жилийн ойн баярын өдөр тохиож байна. Энэ хугацаанд үргэлж миний хажууд байж, намайг дэмжиж, хайрлаж ирсэнд маш их баярлалаа.
+
+                    Чамтайгаа байх хором бүр үнэ цэнэтэй, бас дахин давтагдашгүй байдаг. Энэхүү вэбсайтыг чамдаа зориулж хийлээ. Чамдаа хязгааргүй их хайртай шүү! Баярын мэнд.
+
+                    Үүрд хамтдаа... ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. ХУГАЦАА ТОГТООХ ХЭСЭГ ---
+        const startDate = new Date(2024, 4, 23, 18, 0, 0); 
+
+        function updateCounter() {
+            const now = new Date();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((difference / 1000 / 60) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // --- 2. ХӨГЖМИЙН ЭЛЕМЕНТҮҮДИЙГ ХУУДАС АЧААЛАГДАХАД БАРЬЖ АВАХ ---
+        let music, playPauseBtn, progressBar, progressContainer, trackTime;
+
+        window.onload = function() {
+            music = document.getElementById('bgMusic');
+            playPauseBtn = document.getElementById('playPauseBtn');
+            progressBar = document.getElementById('progressBar');
+            progressContainer = document.getElementById('progressContainer');
+            trackTime = document.getElementById('trackTime');
+
+            // Дууны явцыг дагах
+            music.addEventListener('timeupdate', () => {
+                const currentTime = music.currentTime;
+                const duration = music.duration;
+                
+                if (duration) {
+                    const progressPercent = (currentTime / duration) * 100;
+                    progressBar.style.width = `${progressPercent}%`;
+                    trackTime.innerText = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                }
+            });
+        };
+
+        function formatTime(time) {
+            const mins = Math.floor(time / 60);
+            const secs = Math.floor(time % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // --- 3. ЗАХИДАЛ НЭЭХ БОЛОН ДУУ ЭХЛҮҮЛЭХ ФУНКЦ ---
+        function toggleLetter() {
+            const letter = document.getElementById('letterContent');
+            const btn = document.getElementById('envelopeBtn');
+            
+            letter.classList.toggle('open');
+            
+            if(letter.classList.contains('open')) {
+                btn.innerText = "💖 Нааш нь хараарай";
+                
+                // Захидал нээгдэхэд дууг шууд тоглуулна
+                if (music) {
+                    music.play().then(() => {
+                        playPauseBtn.innerText = "⏸️ Pause";
+                    }).catch(error => {
+                        console.log("Дуу тоглуулахад алдаа гарлаа:", error);
+                    });
+                }
+            } else {
+                btn.innerText = "✉️ Чамдаа зориулсан захидал (Дээр нь дараарай)";
+            }
+        }
+
+        // --- 4. PLAY / PAUSE УДИРДЛАГА ---
+        function togglePlay(event) {
+            event.stopPropagation(); // Захидал хаагдахаас сэргийлнэ
+            if (!music) return;
+
+            if (music.paused) {
+                music.play();
+                playPauseBtn.innerText = "⏸️ Pause";
+            } else {
+                music.pause();
+                playPauseBtn.innerText = "▶️ Play";
+            }
+        }
+
+        // --- 5. ДУУГ УРАГШЛУУЛАХ, УХРААХ ---
+        function setSpeed(event) {
+            event.stopPropagation();
+            if (!music || !music.duration) return;
+
+            const width = progressContainer.clientWidth;
+            const clickX = event.offsetX;
+            const duration = music.duration;
+            
+            music.currentTime = (clickX / width) * duration;
+        }
+
+        // --- 6. АВТОМАТ ЗҮРХ УНАГАХ ЭФФЕКТ ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
